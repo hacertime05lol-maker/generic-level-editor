@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://dn132uogqdg1l"]
+
+[ext_resource type="Script" uid="uid://j2vhsfm7bb3q" path="res://scripts/main.gd" id="1_o5qli"]
+[ext_resource type="Script" uid="uid://cjfrl4atq83mp" path="res://scripts/save_load.gd" id="2_0wfyh"]
+[ext_resource type="PackedScene" uid="uid://b4aqmxgg3i4yv" path="res://scenes/tile.tscn" id="2_jyhfs"]
+[ext_resource type="Script" uid="uid://sgrq44u7wcee" path="res://scripts/interaction.gd" id="3_jyhfs"]
+[ext_resource type="Script" uid="uid://ckytlxqo1424c" path="res://scripts/camera_movement.gd" id="5_tbgi4"]
+
+[node name="main" type="Node2D" unique_id=1527285099 node_paths=PackedStringArray("tiles_parent_node")]
+script = ExtResource("1_o5qli")
+tile = ExtResource("2_jyhfs")
+tiles_parent_node = NodePath("tiles")
+
+[node name="interaction" type="Node2D" parent="." unique_id=1376742103 node_paths=PackedStringArray("main", "save_load")]
+script = ExtResource("3_jyhfs")
+main = NodePath("..")
+save_load = NodePath("../save_load")
+
+[node name="save_load" type="Node" parent="." unique_id=11449751 node_paths=PackedStringArray("main")]
+script = ExtResource("2_0wfyh")
+main = NodePath("..")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=2059960559]
+zoom = Vector2(4, 4)
+script = ExtResource("5_tbgi4")
+
+[node name="tiles" type="Node" parent="." unique_id=294452877]

@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://b4aqmxgg3i4yv"]
+
+[ext_resource type="Texture2D" uid="uid://dwxue317mv28c" path="res://art/grass.tres" id="1_3dk36"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3dk36"]
+size = Vector2(16, 16)
+
+[node name="tile" type="Area2D" unique_id=908922952]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=719807859]
+texture = ExtResource("1_3dk36")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1999729869]
+shape = SubResource("RectangleShape2D_3dk36")

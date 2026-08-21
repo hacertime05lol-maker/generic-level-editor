@@ -1,0 +1,22 @@
+# Godot 4.x cache and local data
+.godot/
+
+# Godot 3.x cache and build data
+.import/
+export_presets.cfg
+
+# Imported translation files
+*.translation
+
+# Mono/C# specific
+.mono/
+data_*/
+mono_crash.*.json
+
+# System and editor files
+.DS_Store
+Thumbs.db
+
+# Godot 4+ specific ignores
+.godot/
+/android/
