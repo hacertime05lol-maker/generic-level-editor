@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b4aqmxgg3i4yv" path="res://scenes/tile.tscn" id="2_jyhfs"]
 [ext_resource type="Script" uid="uid://sgrq44u7wcee" path="res://scripts/interaction.gd" id="3_jyhfs"]
 [ext_resource type="Script" uid="uid://ckytlxqo1424c" path="res://scripts/camera_movement.gd" id="5_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://c2b3hdx2hdhwt" path="res://scenes/player.tscn" id="6_tefeu"]
 
 [node name="main" type="Node2D" unique_id=1527285099 node_paths=PackedStringArray("tiles_parent_node")]
 script = ExtResource("1_o5qli")
@@ -25,3 +26,5 @@ zoom = Vector2(4, 4)
 script = ExtResource("5_tbgi4")
 
 [node name="tiles" type="Node" parent="." unique_id=294452877]
+
+[node name="player" parent="." unique_id=959913468 instance=ExtResource("6_tefeu")]
