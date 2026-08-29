@@ -4,7 +4,7 @@ class_name SaveLoad extends Node
 const path: String = "user://save.json"
 
 func _ready() -> void:
-	load_level()
+	call_deferred("load_level")
 
 func save_level() -> void:
 	var file := FileAccess.open(path, FileAccess.WRITE)
@@ -16,7 +16,7 @@ func save_level() -> void:
 	
 	for spawned_tile in tile_manager.get_all_tiles():
 		var spawned_tile_data: SpawnedTileData = spawned_tile as SpawnedTileData
-		var tile := Tile.new(spawned_tile.global_position, spawned_tile_data.tile_index)
+		var tile := Tile.new(spawned_tile_data.tile_name, spawned_tile.global_position)
 		level.append(tile)
 	
 	file.store_var(level, true)
@@ -34,7 +34,7 @@ func load_level() -> void:
 		
 		if level != null:
 			for tile in level:
-				tile_manager.spawn_tile(tile.position, tile.tile_index)
+				tile_manager.spawn_tile(tile.position, tile.tile_name)
 
 func delete_level() -> void:
 	if FileAccess.file_exists(path):

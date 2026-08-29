@@ -2,19 +2,34 @@ class_name TileManager extends Node2D
 
 @export var tile: PackedScene
 @export var tiles_parent_node: Node
-@export var tile_collision_mask: int = 2
-@export var tile_textures: Array[Texture2D]
 
+var tile_textures_path: String = "res://art/tile_textures/"
+var tile_textures: Array[Texture2D] = []
+
+const tile_collision_mask: int = 2
 const TILE_SIZE: int = 16
 
-func spawn_tile(pos: Vector2, tile_index: int) -> void:
+func _ready() -> void:
+	load_tile_textures()
+
+func spawn_tile(pos: Vector2, tile_name: String) -> void:
 	var new_tile: Node = GodotUtils.instantiate(tile, tiles_parent_node, pos)
 	
-	var spawned_tile_data: SpawnedTileData = new_tile as SpawnedTileData
-	spawned_tile_data.tile_index = tile_index
+	var new_texture: Texture2D = null
+	for texture in tile_textures:
+		if GodotUtils.get_texture_name(texture) == tile_name:
+			new_texture = texture
+			break
+	
+	if new_texture == null:
+		printerr("Texture not present!")
+		return
 	
 	var tile_sprite: Sprite2D = new_tile.get_child(0) as Sprite2D
-	tile_sprite.texture = tile_textures[tile_index]
+	tile_sprite.texture = new_texture
+	
+	var spawned_tile_data: SpawnedTileData = new_tile as SpawnedTileData
+	spawned_tile_data.tile_name = tile_name
 
 func is_tile_at_position(pos: Vector2) -> bool:
 	return get_tiles_at_position(pos).size() > 0
@@ -37,3 +52,31 @@ func get_tiles_at_position(pos: Vector2) -> Array[Node]:
 
 func get_all_tiles() -> Array[Node]:
 	return tiles_parent_node.get_children()
+
+func load_tile_textures() -> void:
+	tile_textures.clear()
+	
+	var dir: DirAccess = DirAccess.open(tile_textures_path)
+	if not dir:
+		push_error("Failed to open directory: " + tile_textures_path)
+		return
+	
+	dir.list_dir_begin()
+	var file_name := dir.get_next()
+	
+	while file_name != "":
+		if not dir.current_is_dir():
+			var resource_name := file_name.trim_suffix(".import")
+			
+			var ext := resource_name.get_extension().to_lower()
+			if ext in ["png", "jpg", "jpeg", "webp", "svg"]:
+				var full_path := tile_textures_path + resource_name
+				
+				if ResourceLoader.exists(full_path):
+					var texture := ResourceLoader.load(full_path) as Texture2D
+					if texture and not tile_textures.has(texture):
+						tile_textures.append(texture)
+		
+		file_name = dir.get_next()
+	
+	dir.list_dir_end()

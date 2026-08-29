@@ -5,17 +5,19 @@
 [ext_resource type="PackedScene" uid="uid://b4aqmxgg3i4yv" path="res://scenes/tile.tscn" id="2_jyhfs"]
 [ext_resource type="Script" uid="uid://b2oj78i77tc5d" path="res://scripts/tile_manager.gd" id="2_tefeu"]
 [ext_resource type="Script" uid="uid://sgrq44u7wcee" path="res://scripts/interaction.gd" id="3_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://d7oi1pq5xpgb" path="res://scenes/main_ui.tscn" id="3_trceg"]
 [ext_resource type="Script" uid="uid://ckytlxqo1424c" path="res://scripts/camera_movement.gd" id="5_tbgi4"]
-[ext_resource type="Texture2D" uid="uid://dwxue317mv28c" path="res://art/grass.tres" id="6_eb6dy"]
 [ext_resource type="PackedScene" uid="uid://c2b3hdx2hdhwt" path="res://scenes/player.tscn" id="6_tefeu"]
 [ext_resource type="Script" uid="uid://c5pvq7uq01o45" path="res://scripts/mode_manager.gd" id="6_tipki"]
-[ext_resource type="Texture2D" uid="uid://bburabmebwq1j" path="res://art/dirt.tres" id="7_trceg"]
-[ext_resource type="Texture2D" uid="uid://celj4dotdfkwh" path="res://art/stone.tres" id="8_a8y0u"]
-[ext_resource type="Texture2D" uid="uid://dirsbjaj3uyaa" path="res://art/rocks.tres" id="9_jkv2x"]
 
 [node name="main" type="Node2D" unique_id=1527285099]
 script = ExtResource("1_o5qli")
 player_scene = ExtResource("6_tefeu")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=832208806]
+
+[node name="main_ui" parent="CanvasLayer" unique_id=694379020 node_paths=PackedStringArray("tile_manager") instance=ExtResource("3_trceg")]
+tile_manager = NodePath("../../tile_manager")
 
 [node name="interaction" type="Node2D" parent="." unique_id=1376742103 node_paths=PackedStringArray("tile_manager", "save_load", "mode_manager")]
 script = ExtResource("3_jyhfs")
@@ -27,7 +29,6 @@ mode_manager = NodePath("../mode_manager")
 script = ExtResource("2_tefeu")
 tile = ExtResource("2_jyhfs")
 tiles_parent_node = NodePath("tiles")
-tile_textures = Array[Texture2D]([ExtResource("6_eb6dy"), ExtResource("7_trceg"), ExtResource("9_jkv2x"), ExtResource("8_a8y0u")])
 
 [node name="tiles" type="Node" parent="tile_manager" unique_id=294452877]
 

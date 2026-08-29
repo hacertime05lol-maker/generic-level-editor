@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://d7oi1pq5xpgb"]
+
+[ext_resource type="Script" uid="uid://so3q6akxhr5r" path="res://scripts/main_ui.gd" id="1_scoti"]
+
+[node name="main_ui" type="Control" unique_id=694379020 node_paths=PackedStringArray("tiles_list")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_scoti")
+tiles_list = NodePath("VBoxContainer/Panel/tiles_list")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=152169204]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.8
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Panel" type="Panel" parent="VBoxContainer" unique_id=1028640807]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="tiles_list" type="ItemList" parent="VBoxContainer/Panel" unique_id=832001994]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+max_columns = 10
+icon_scale = 5.0

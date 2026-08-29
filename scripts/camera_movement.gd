@@ -1,14 +1,13 @@
 extends Camera2D
 
-var previous_position: Vector2 = Vector2.ZERO
-var move_camera: bool = false
+const zoom_strenght: float = 1
+const zoom_lerp_speed: float = 16
+const min_zoom: float = 0.1
+const max_zoom: float = 500
+const zoom_factor: float = 1.1
 
-var zoom_strenght: float = 1
+var move_camera: bool = false
 var target_zoom: float
-var zoom_lerp_speed: float = 16
-var min_zoom: float = 0.1
-var max_zoom: float = 500
-var zoom_factor: float = 1.1
 
 func _ready() -> void:
 	target_zoom = zoom.x
@@ -19,13 +18,12 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func handle_camera_dragging(event: InputEvent) -> void:
 	if event.is_action_pressed("move_camera_button"):
-		previous_position = get_global_mouse_position()
 		move_camera = true
 	elif event.is_action_released("move_camera_button"):
 		move_camera = false
 	
 	if event is InputEventMouseMotion and move_camera:
-		position += previous_position - get_global_mouse_position()
+		position -= event.relative * (1.0 / zoom.x)
 
 func handle_camera_zooming(event: InputEvent) -> void:
 	if event is InputEventMouseButton:

@@ -17,3 +17,6 @@ static func get_component(node: Node, type: Script) -> Node:
 		if is_instance_of(child, type):
 			return child
 	return null
+
+static func get_texture_name(texture: Texture) -> String:
+	return texture.resource_path.get_basename().get_file()
