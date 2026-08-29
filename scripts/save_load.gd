@@ -1,6 +1,6 @@
 class_name SaveLoad extends Node
 
-@export var main: Main
+@export var tile_manager: TileManager
 const path: String = "user://save.json"
 
 func _ready() -> void:
@@ -14,7 +14,7 @@ func save_level() -> void:
 	
 	var level: Array[Tile] = []
 	
-	for spawned_tile in main.get_all_tiles():
+	for spawned_tile in tile_manager.get_all_tiles():
 		var tile := Tile.new(0, spawned_tile.global_position)
 		level.append(tile)
 	
@@ -33,4 +33,4 @@ func load_level() -> void:
 		
 		if level != null:
 			for tile in level:
-				main.spawn_tile(tile.position)
+				tile_manager.spawn_tile(tile.position)
