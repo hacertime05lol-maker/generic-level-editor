@@ -15,7 +15,8 @@ func save_level() -> void:
 	var level: Array[Tile] = []
 	
 	for spawned_tile in tile_manager.get_all_tiles():
-		var tile := Tile.new(0, spawned_tile.global_position)
+		var spawned_tile_data: SpawnedTileData = spawned_tile as SpawnedTileData
+		var tile := Tile.new(spawned_tile.global_position, spawned_tile_data.tile_index)
 		level.append(tile)
 	
 	file.store_var(level, true)
@@ -33,4 +34,10 @@ func load_level() -> void:
 		
 		if level != null:
 			for tile in level:
-				tile_manager.spawn_tile(tile.position)
+				tile_manager.spawn_tile(tile.position, tile.tile_index)
+
+func delete_level() -> void:
+	if FileAccess.file_exists(path):
+		var delete_status = DirAccess.remove_absolute(path)
+		if delete_status != OK:
+			push_error("Failed to delete level file. Error code: ", delete_status)

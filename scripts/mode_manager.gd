@@ -5,7 +5,7 @@ class_name ModeManager extends Node
 
 var editor_mode: EditorMode = EditorMode.EDITOR
 
-func switch_editor_mode():
+func switch_editor_mode() -> void:
 	var new_mode: EditorMode
 	if editor_mode == EditorMode.EDITOR:
 		new_mode = EditorMode.GAME
@@ -14,7 +14,7 @@ func switch_editor_mode():
 	
 	change_editor_mode(new_mode)
 
-func change_editor_mode(mode: EditorMode):
+func change_editor_mode(mode: EditorMode) -> void:
 	if mode == editor_mode:
 		return
 	

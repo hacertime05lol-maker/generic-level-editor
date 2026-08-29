@@ -1,12 +1,14 @@
 [gd_scene format=3 uid="uid://b4aqmxgg3i4yv"]
 
 [ext_resource type="Texture2D" uid="uid://dwxue317mv28c" path="res://art/grass.tres" id="1_3dk36"]
+[ext_resource type="Script" uid="uid://c0qmud1cloeye" path="res://scripts/spawned_tile_data.gd" id="1_ywnoi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3dk36"]
 size = Vector2(16, 16)
 
 [node name="tile" type="StaticBody2D" unique_id=2008266928]
 collision_layer = 3
+script = ExtResource("1_ywnoi")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=719807859]
 texture = ExtResource("1_3dk36")

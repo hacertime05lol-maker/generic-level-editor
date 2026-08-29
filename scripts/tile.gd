@@ -1,8 +1,8 @@
 class_name Tile extends RefCounted
 
-@export var id: int = 0
-@export var position: Vector2 = Vector2(0, 0)
+var position: Vector2
+var tile_index: int
 
-func _init(p_id: int = 0, p_position: Vector2 = Vector2(0, 0)) -> void:
-	id = p_id
+func _init(p_position: Vector2 = Vector2.ZERO, p_tile_index: int = 0) -> void:
 	position = p_position
+	tile_index = p_tile_index
